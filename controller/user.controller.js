@@ -23,7 +23,7 @@ module.exports = {
             if (!err) {
                 res.status(201).json({
                     message: 'registered succes',
-                    data: result,
+                    data: result
                 })
             } else {
                 res.status(500).json({
@@ -36,27 +36,30 @@ module.exports = {
     login:function (req,res) {
         //res.send('MASUKKKKK')
         //let{username} = req.body
-        User.findOne({$or: [
-            {email: req.body.email},
-            {password: req.body.password}
-        ]}),function(err, user){
+        User.findOne({
+            username: req.body.username,
+        }
+        ,function(err, user){
             if (err) {
                 throw err
-            } 
+            }else{
+                //res.send(user.password)
 
-            user.comparePassword(req.body.password, function(err,isMatch){
-                if(err){
-                    throw err
-                }
-                if(isMatch){    
-                    let token = jwt.sign({username},'SECRET');
-                    res.status(200).json(user.token)
-                }
-                else{
-                    res.status(500).json('WRONG PASSWORD')
-                }
-            })
-             
-        };
+                user.comparePassword(req.body.password, function(err,isMatch){
+                    if(err){
+                        throw err;
+                        
+                    }
+                    // console.log('Password123:', isMatch);
+                    if(isMatch){    
+                        let token = jwt.sign({id:user._id,username:user.username},'SECRET');
+                        res.status(200).json({token})
+                    }
+                    else{
+                        res.status(500).json('WRONG PASSWORD')
+                    }
+                })
+            }                        
+        })
     }    
 }

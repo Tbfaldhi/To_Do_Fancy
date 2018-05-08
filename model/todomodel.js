@@ -1,9 +1,13 @@
 const mongoose = require('mongoose');
-var schema = new mongoose.Schema({ 
-  todo: String },
+var taskSchema = new mongoose.Schema({ 
+  userId:String,
+  task: String,
+  status: String
+   },
   {
     timestamps: true
   });
-var Todo = mongoose.model('Todolist', schema);
 
-module.exports = Todo
+  var Task = mongoose.model('taskList', taskSchema);
+
+module.exports = { Task }
