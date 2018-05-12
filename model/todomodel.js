@@ -1,8 +1,13 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'),
+      Schema = mongoose.Schema,
+      User = require('./usermodel')
+
+
 var taskSchema = new mongoose.Schema({ 
   userId:String,
   task: String,
-  status: String
+  status: String,
+  users: [{ type: Schema.Types.ObjectId, ref:'User',required:true }]
    },
   {
     timestamps: true

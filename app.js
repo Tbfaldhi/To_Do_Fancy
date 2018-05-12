@@ -4,6 +4,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require( 'mongoose' )
+const dbuser = process.env.DBUSER
+const dbpass =process.env.DBPASS
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');

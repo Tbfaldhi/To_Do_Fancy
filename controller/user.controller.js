@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const  { User }  = require('../model/usermodel')
 const mongoose = require('mongoose')
+const pwd = process.env.SECRETCODE
 
 module.exports = {
 
@@ -52,7 +53,7 @@ module.exports = {
                     }
                     // console.log('Password123:', isMatch);
                     if(isMatch){    
-                        let token = jwt.sign({id:user._id,username:user.username},'SECRET');
+                        let token = jwt.sign({id:user._id,username:user.username},"SECRET");
                         res.status(200).json({token})
                     }
                     else{

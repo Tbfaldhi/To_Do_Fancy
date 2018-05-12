@@ -1,7 +1,8 @@
 const mongoose = require('mongoose'),
       Schema = mongoose.Schema,
       bcrypt = require('bcrypt'),
-      SALT_WORK_FACTOR = 10;
+      SALT_WORK_FACTOR = 10,
+      Task = require('./todomodel')
       
 const validateEmail = function(email) {
   var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -37,10 +38,13 @@ const UserSchema = new Schema({
 
   password: {
     type:String,
-    // required: 'password is required',
-    // validate: [validatePassword, 'Please fill password with minimal 8 character alfanumerik'],
     minlength: 8
-    } });
+    },
+    
+    todos: [{ type: Schema.Types.ObjectId, ref: 'Task' }]
+
+  
+  });
 
 
 
