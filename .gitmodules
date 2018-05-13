@@ -1,0 +1,3 @@
+[submodule "server"]
+	path = server
+	url = https://github.com/Tbfaldhi/To_Do_Fancy.git
